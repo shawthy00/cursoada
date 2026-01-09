@@ -11,6 +11,7 @@ public class Horas {
     private LocalTime saidaAlmoco;
     private LocalTime retornoAlmoco;
     private LocalTime saida;
+    private float acumuladas;
 
     // Construtor
 
@@ -39,6 +40,8 @@ public class Horas {
         d1 = Duration.between(this.getEntrada(), this.getSaidaAlmoco());
         d2 = Duration.between(this.getRetornoAlmoco(), this.getSaida());
 
+        // sc.close(); // classe não pode fechar System.in, caso o faça ele nao será mais aberto. Gera erro!!
+
         horasTotais = d1.plus(d2);
 
         float horas = horasTotais.toHours();
@@ -46,7 +49,9 @@ public class Horas {
 
         System.out.println("Total trabalhado: " + horas + "h " + minutos + "min");
 
-        return (horas + minutos / 60);
+        this.setAcumuladas(this.getAcumuladas() + horas + minutos / 60);
+
+        return this.getAcumuladas();
     }
 
 
@@ -76,6 +81,14 @@ public class Horas {
 
     public LocalTime getSaida() {
         return saida;
+    }
+
+    public float getAcumuladas() {
+        return acumuladas;
+    }
+
+    public void setAcumuladas(float acumuladas) {
+        this.acumuladas = acumuladas;
     }
 
     public void setSaida(LocalTime saida) {

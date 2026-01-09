@@ -1,21 +1,30 @@
 package Aula2;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        parcelas(10);
-    }
 
+    public static void main(String[] args){
 
-    public static void parcelas(int quant) {
-        var formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        var hoje = LocalDate.now();
-        LocalDate prox;
+        Scanner scan = new Scanner(System.in);
+        Horas trabalhado = new Horas();
+        float acumulado = 0;
 
-        for(int k = 1; k <= quant; k++){
-            prox = hoje.plusMonths(k);
-            System.out.println("A parcela " + k + "será em: " + prox.format(formatter));
+        while (true) {
+
+            System.out.println("Deseja acrescentar um novo registro de dia trabalhado? [S] ou [N]");
+            String resposta = scan.nextLine();
+
+            if(resposta.equalsIgnoreCase("S")) {
+
+                acumulado = trabalhado.expediente();
+
+                System.out.println(acumulado);
+
+            } else {
+                break;
+            }
         }
+        scan.close();
     }
 }

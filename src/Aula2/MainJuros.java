@@ -3,7 +3,7 @@ package Aula2;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class MainJutos {
+public class MainJuros {
 
     public static void main(String[] argd){
         parcelas(1000, 1f, 12);
