@@ -25,6 +25,13 @@ public class Main {
                 break;
             }
         }
+
+        Pagamento funciotario1 = new Pagamento(100, acumulado);
+
+        System.out.println(funciotario1.toString());
+
+
         scan.close();
+
     }
 }

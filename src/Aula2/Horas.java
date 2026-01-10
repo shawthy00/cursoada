@@ -39,6 +39,8 @@ public class Horas {
         Duration d1, d2, horasTotais;
         d1 = Duration.between(this.getEntrada(), this.getSaidaAlmoco());
         d2 = Duration.between(this.getRetornoAlmoco(), this.getSaida());
+        // aconselhavel lançar excessão para caso digite data mal formatada
+        // acrescentar um fluxo caso as horas sejam erradas, como <h almoço ou retornar antes de sair
 
         // sc.close(); // classe não pode fechar System.in, caso o faça ele nao será mais aberto. Gera erro!!
 
