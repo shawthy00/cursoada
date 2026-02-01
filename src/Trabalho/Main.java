@@ -47,7 +47,7 @@ public class Main {
                         }
                         case 3 -> Cadastro.ordenarDatas(listaTarefas);
 
-                        case 4 -> Cadastro.filtrarNaoConcluidas(listaTarefas);
+                        case 4 -> Cadastro.filtrarNaoConcluidas(listaTarefas, scan);
 
                         case 5 -> Tarefa.darInicio(listaTarefas, scan);
 

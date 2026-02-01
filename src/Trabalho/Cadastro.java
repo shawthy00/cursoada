@@ -80,9 +80,14 @@ public class Cadastro {
                         .forEach(Cadastro::listar);
     }
 
-    public static void filtrarNaoConcluidas(List<Tarefa> listaTarefas) {
+    public static void filtrarNaoConcluidas(List<Tarefa> listaTarefas, Scanner scan) {
+
+        System.out.print("Informe a data dd/MM/yyyy: ");
+        LocalDate data = LocalDate.parse(scan.nextLine(), FORMATTER);
+
         listaTarefas.stream()
                 .filter(t -> (t.getStatus() != Status.CONCLUIDO))
+                .filter(t -> t.getDataLimite().isAfter(data))
                 .sorted(Comparator.comparing((Tarefa::getDataLimite)))
                 .forEach(Cadastro::listar);
     }

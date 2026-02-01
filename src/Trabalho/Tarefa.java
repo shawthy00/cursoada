@@ -83,6 +83,8 @@ public class Tarefa {
         int total = listaTarefas.size();
         int id = scan.nextInt();
 
+        System.out.println("Qual atividade vc quer colocar em EXECUçÃO: ");
+
         if( id <= total && id > 0) {
             tarefaOpt(listaTarefas, id)
                     .ifPresent(t -> t.setStatus(Status.EXECUTANDO));
@@ -92,6 +94,8 @@ public class Tarefa {
     public static void finalizar (List<Tarefa> listaTarefas, Scanner scan) {
         int total = listaTarefas.size();
         int id = scan.nextInt();
+
+        System.out.println("Qual atividade vc quer FINALZIAR: ");
 
         if (id <= total && id > 0) {
             tarefaOpt(listaTarefas, id)
