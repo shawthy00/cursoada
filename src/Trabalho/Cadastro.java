@@ -6,6 +6,8 @@ import java.time.format.DateTimeParseException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.*;
 
 public class Cadastro {
 
@@ -18,6 +20,9 @@ public class Cadastro {
     public static void apresentar(){
         System.out.println("Bem vindo ao programa de cadastro de Tarefas.");
         System.out.println("===============Vamos  iniciar================\n");
+    }
+
+    public static void menu1(){
         System.out.println("O que deseja realizar?");
         System.out.println("1 - Cadastrar tarefa");
         System.out.println("2 - Visualizar tarefas;");
@@ -29,7 +34,7 @@ public class Cadastro {
         System.out.println("1 - Cadastrar tarefa");
         System.out.println("2 - Filtrar por status;");
         System.out.println("3 - Filtrar por ordem de data limite;");
-        System.out.println("4 - Tarefas não concluidas a partir de uma data dd/MM/yyyy;");
+        System.out.println("4 - Tarefas não concluidas a partir de uma data (dd/MM/yyyy)");
         System.out.println("0 - Sair");
     }
 
@@ -120,5 +125,67 @@ public class Cadastro {
                 )
         );
     }
+
+    // adicionando leitura de arquivo
+    public static void carregarArquivo (String nomeArquivo, List<Tarefa> listaTarefas){
+        Path caminho = Paths.get(nomeArquivo);
+
+        try {
+            if (Files.notExists(caminho)) {
+                Files.createFile(caminho);
+                Files.writeString(caminho, "ID;TÍTUL;DESCRIÇÃO;STATUS;DATA LIMITE\n");
+                return;
+            }
+
+            List<String> linhas = Files.readAllLines(caminho);
+
+            int maiorId = 0;    // Variavel local para o id
+
+            for (int i = 1; i < linhas.size(); i++) {
+                String[] dados = linhas.get(i).split(";");
+
+                int id = Integer.parseInt(dados[0]);
+
+                Tarefa t = Tarefa.fromArquivo(
+                        id,
+                        dados[1],
+                        dados[2],
+                        Status.valueOf(dados[3]),
+                        LocalDate.parse(dados[4])
+                );
+                listaTarefas.add(t);
+
+                maiorId = Math.max(maiorId, id);
+            }
+
+            Tarefa.ajustarId(maiorId + 1);
+
+        } catch (IOException e){
+            System.out.println("Erro ao ler arquivo: " + e.getMessage());
+        }
+
+    }
+
+    public static void salvarArquivo (String nomeArquivo, List<Tarefa> listaTarefas) {
+        Path caminho = Paths.get(nomeArquivo);
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("ID;TÍTUL;DESCRIÇÃO;STATUS;DATA LIMITE\n");
+
+        for (Tarefa t: listaTarefas){
+            sb.append(t.getId()).append(";")
+                    .append(t.getTitulo()).append(";")
+                    .append(t.getDescricao()).append(";")
+                    .append(t.getStatus().name()).append(";")
+                    .append(t.getDataLimite()).append("\n");
+        }
+
+        try {
+            Files.writeString(caminho, sb.toString(), StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar arquivo: " + e.getMessage());
+        }
+    }
+
 }
 

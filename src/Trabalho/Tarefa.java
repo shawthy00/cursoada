@@ -14,7 +14,7 @@ public class Tarefa {
     private LocalDate dataLimite;
     private Status status;
 
-    // construtor
+    // construtor publico, para acesso das outras classes que revebem dados do cliente
     public Tarefa(String titulo, String descricao, LocalDate dataLimite) {
         // condicoes de existencia
         if (titulo == null || titulo.isBlank()) {
@@ -41,7 +41,37 @@ public class Tarefa {
         this.status = Status.PENDENTE;  // cadastra pendente automaticamente, mas poderá alterar para EXECUTANDO
     }
 
+    // construtor privado, para receber dados da leitura do arquivo
+    // construtor COMPLETO (privado)
+    private Tarefa(int id,
+                   String titulo,
+                   String descricao,
+                   Status status,
+                   LocalDate dataLimite) {
+
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.status = status;
+        this.dataLimite = dataLimite;
+    }
+
     // metodos
+    // metodo para construir objetos do arquivo - para contornar Status e id_sequencial
+    public static Tarefa fromArquivo(
+            int id,
+            String titulo,
+            String descricao,
+            Status status,
+            LocalDate dataLimite) {
+
+        return new Tarefa(id, titulo, descricao, status, dataLimite);
+    }
+
+    public static void ajustarId (int proximoId) {
+        if (proximoId > id_sequencial) id_sequencial = proximoId;   //ajusta o Id para quando puxa dados do arquivo
+    }
+
     public Optional<Tarefa> tarefaOpt (List<Tarefa> listaTarefa, int id) {
         return listaTarefa.stream()
                 .filter( t -> t.getId() == id)

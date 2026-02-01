@@ -13,8 +13,11 @@ public class Main {
 
         List<Tarefa> listaTarefas = new ArrayList<>();
 
+        Cadastro.carregarArquivo("agenda.csv", listaTarefas);
+        Cadastro.apresentar();
+
         while(executando) {
-            Cadastro.apresentar();  // saudação
+            Cadastro.menu1();  // saudação
 
             int opcao = scan.nextInt();
             scan.nextLine();    // limpeza do buffer
@@ -25,12 +28,13 @@ public class Main {
                 case 2 -> {
                     Cadastro.listar(listaTarefas);
 
-                    Cadastro.menuFiltros(); // mostra o menu de opções de filtros, implementar melhorias
+                    Cadastro.menuFiltros(); // mostra o menu de opções de filtros, 4 opcoes
+
                     int opcao2 = scan.nextInt();
                     scan.nextLine();
 
                     switch (opcao2) {
-                        case 1 -> Cadastro.listar(listaTarefas);
+                        case 1 -> Cadastro.cadastrarTarefa(scan, listaTarefas);    // break nao necessario, pois foi usado "->"
 
                         case 2 -> {
                             Cadastro.menuStatus();
@@ -48,6 +52,7 @@ public class Main {
                         }
 
                         case 0 -> {
+                            Cadastro.salvarArquivo("agenda.csv", listaTarefas);
                             System.out.println("Fechando agenda...");
                             executando = false;
                         }
@@ -57,13 +62,13 @@ public class Main {
                 }
 
                 case 0 -> {
+                    Cadastro.salvarArquivo("agenda.csv", listaTarefas);
                     System.out.println("Fechando agenda...");
                     executando = false;
                 }
                 default -> System.out.println("Opcao invalida!!!");
             }
 
-            //executando = true;
 
         }
     }
