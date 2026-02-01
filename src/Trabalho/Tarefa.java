@@ -1,6 +1,8 @@
 package Trabalho;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
 public class Tarefa {
     // atributos
@@ -40,9 +42,26 @@ public class Tarefa {
     }
 
     // metodos
-    public Status statusCadastro (int escolha) {
-        if (escolha == 1) return Status.EXECUTANDO;
-        return null; // não altera o status caso nao esteja a executando ao cria-la
+    public Optional<Tarefa> tarefaOpt (List<Tarefa> listaTarefa, int id) {
+        return listaTarefa.stream()
+                .filter( t -> t.getId() == id)
+                .findFirst();
+    }
+
+    public void darInicio (List<Tarefa> listaTarefas, int id) {
+        int total = listaTarefas.size();
+        if( id <= total && id > 0) {
+            tarefaOpt(listaTarefas, id)
+                    .ifPresent(t -> t.setStatus(Status.EXECUTANDO));
+        }
+    }
+
+    public void finalizar (List<Tarefa> listaTarefas, int id) {
+        int total = listaTarefas.size();
+        if (id <= total && id > 0) {
+            tarefaOpt(listaTarefas, id)
+                    .ifPresent(t -> t.setStatus(Status.CONCLUIDO));
+        }
     }
 
     public String descricaoTrunc() {

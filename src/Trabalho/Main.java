@@ -1,11 +1,9 @@
 package Trabalho;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -24,23 +22,48 @@ public class Main {
             switch (opcao){
                 case 1 -> Cadastro.cadastrarTarefa(scan, listaTarefas);
 
-                case 2 -> Cadastro.listar(listaTarefas);
+                case 2 -> {
+                    Cadastro.listar(listaTarefas);
 
-                case 0 -> {
-                    System.out.println("Fechando agenda.");
-                    executando = false;
+                    Cadastro.menuFiltros(); // mostra o menu de opções de filtros, implementar melhorias
+                    int opcao2 = scan.nextInt();
+                    scan.nextLine();
+
+                    switch (opcao2) {
+                        case 1 -> Cadastro.listar(listaTarefas);
+
+                        case 2 -> {
+                            Cadastro.menuStatus();
+
+                            int opcaoStatus = scan.nextInt();
+                            scan.nextLine();
+
+                            Cadastro.filtrarStatus(listaTarefas, opcaoStatus);
+
+                        }
+                        case 3 -> Cadastro.ordenarDatas(listaTarefas);
+
+                        case 4 -> {
+                            Cadastro.filtrarNaoConcluidas(listaTarefas);
+                        }
+
+                        case 0 -> {
+                            System.out.println("Fechando agenda...");
+                            executando = false;
+                        }
+                        default -> System.out.println("Opcao invalida!!!");
+
+                    }
                 }
 
+                case 0 -> {
+                    System.out.println("Fechando agenda...");
+                    executando = false;
+                }
                 default -> System.out.println("Opcao invalida!!!");
             }
 
-
-            // cadastro
-            // alterar
-            // visualizar//listar
-            // encerrar
-
-            executando = true;
+            //executando = true;
 
         }
     }
