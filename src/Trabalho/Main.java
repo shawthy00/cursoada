@@ -51,6 +51,10 @@ public class Main {
                             Cadastro.filtrarNaoConcluidas(listaTarefas);
                         }
 
+                        case 5 -> Tarefa.darInicio(listaTarefas, scan);
+
+                        case 6 -> Tarefa.finalizar(listaTarefas, scan);
+
                         case 0 -> {
                             Cadastro.salvarArquivo("agenda.csv", listaTarefas);
                             System.out.println("Fechando agenda...");

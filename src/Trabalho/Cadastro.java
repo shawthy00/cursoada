@@ -35,6 +35,8 @@ public class Cadastro {
         System.out.println("2 - Filtrar por status;");
         System.out.println("3 - Filtrar por ordem de data limite;");
         System.out.println("4 - Tarefas não concluidas a partir de uma data (dd/MM/yyyy)");
+        System.out.println("5 - Dar inicio a um tarefa");
+        System.out.println("6 - Finalizar uma tarefa");
         System.out.println("0 - Sair");
     }
 

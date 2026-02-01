@@ -3,6 +3,7 @@ package Trabalho;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 
 public class Tarefa {
     // atributos
@@ -72,22 +73,26 @@ public class Tarefa {
         if (proximoId > id_sequencial) id_sequencial = proximoId;   //ajusta o Id para quando puxa dados do arquivo
     }
 
-    public Optional<Tarefa> tarefaOpt (List<Tarefa> listaTarefa, int id) {
+    public static Optional<Tarefa> tarefaOpt(List<Tarefa> listaTarefa, int id) {
         return listaTarefa.stream()
                 .filter( t -> t.getId() == id)
                 .findFirst();
     }
 
-    public void darInicio (List<Tarefa> listaTarefas, int id) {
+    public static void darInicio(List<Tarefa> listaTarefas, Scanner scan) {
         int total = listaTarefas.size();
+        int id = scan.nextInt();
+
         if( id <= total && id > 0) {
             tarefaOpt(listaTarefas, id)
                     .ifPresent(t -> t.setStatus(Status.EXECUTANDO));
         }
     }
 
-    public void finalizar (List<Tarefa> listaTarefas, int id) {
+    public static void finalizar (List<Tarefa> listaTarefas, Scanner scan) {
         int total = listaTarefas.size();
+        int id = scan.nextInt();
+
         if (id <= total && id > 0) {
             tarefaOpt(listaTarefas, id)
                     .ifPresent(t -> t.setStatus(Status.CONCLUIDO));
