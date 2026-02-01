@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class Main {
     public static void main(String[] args) {
 
@@ -59,13 +58,8 @@ public class Main {
 
                     }
                 }
-
                 case 0 -> executando = Tarefa.fechamento(listaTarefas);
-//                {
-//                    Cadastro.salvarArquivo("agenda.csv", listaTarefas);
-//                    System.out.println("Salvando e fechando agenda...");
-//                    executando = false;
-//                }
+
                 default -> System.out.println("Opcao invalida!!!");
             }
         }
@@ -74,3 +68,10 @@ public class Main {
 
     }
 }
+
+
+// MELHORIAS A IMPLENTAR:
+// Acertar para as datas ficarem uniformizadas em todas instâncias
+// Evitar switch // case na main, reduzindo o código e o desacoplando
+// Verificar todas instâncias de excessões
+// Implementar setDataLimite(), setTitulo() e setDescricao(), a fim de permitir alterações na aplicação
