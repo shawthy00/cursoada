@@ -98,6 +98,22 @@ public class Cadastro {
                 .forEach(Cadastro::listar);
     }
 
+    // Extra, lista as atividades com pouco tempo para encerrar
+    public static void proximas(List<Tarefa> listaTarefas) {
+        System.out.println("=====ALERTA=====");
+
+        System.out.println("Lembre-se, aas seguintes tarefas se encerram HOJE:");
+        listaTarefas.stream()
+                .filter(t -> (t.getDataLimite().isEqual(LocalDate.now())) &&
+                        t.getStatus() != Status.CONCLUIDO)
+                .forEach(Cadastro::listar);
+
+        System.out.println("Lembre-se, aas seguintes tarefas se encerram AMANHÃ:");
+        listaTarefas.stream()
+                .filter(t -> (t.getDataLimite().isEqual(LocalDate.now().plusDays(1))) &&
+                        t.getStatus() != Status.CONCLUIDO)
+                .forEach(Cadastro::listar);
+    }
 
 
     //Sobrecarga do metodo listar

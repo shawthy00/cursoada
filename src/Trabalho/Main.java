@@ -68,8 +68,9 @@ public class Main {
 //                }
                 default -> System.out.println("Opcao invalida!!!");
             }
-
-
         }
+
+        Cadastro.proximas(listaTarefas);
+
     }
 }

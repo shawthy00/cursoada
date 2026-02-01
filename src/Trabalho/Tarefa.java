@@ -164,9 +164,3 @@ public class Tarefa {
         this.status = status;
     }
 }
-
-
-
-// cadastrar, listar e filtrar tarefas
-
-// extras serão pensados apos a entrega minima
