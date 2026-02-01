@@ -47,29 +47,25 @@ public class Main {
                         }
                         case 3 -> Cadastro.ordenarDatas(listaTarefas);
 
-                        case 4 -> {
-                            Cadastro.filtrarNaoConcluidas(listaTarefas);
-                        }
+                        case 4 -> Cadastro.filtrarNaoConcluidas(listaTarefas);
 
                         case 5 -> Tarefa.darInicio(listaTarefas, scan);
 
                         case 6 -> Tarefa.finalizar(listaTarefas, scan);
 
-                        case 0 -> {
-                            Cadastro.salvarArquivo("agenda.csv", listaTarefas);
-                            System.out.println("Fechando agenda...");
-                            executando = false;
-                        }
+                        case 0 -> executando = Tarefa.fechamento(listaTarefas); // mais limpo
+
                         default -> System.out.println("Opcao invalida!!!");
 
                     }
                 }
 
-                case 0 -> {
-                    Cadastro.salvarArquivo("agenda.csv", listaTarefas);
-                    System.out.println("Fechando agenda...");
-                    executando = false;
-                }
+                case 0 -> executando = Tarefa.fechamento(listaTarefas);
+//                {
+//                    Cadastro.salvarArquivo("agenda.csv", listaTarefas);
+//                    System.out.println("Salvando e fechando agenda...");
+//                    executando = false;
+//                }
                 default -> System.out.println("Opcao invalida!!!");
             }
 

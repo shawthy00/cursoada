@@ -99,6 +99,13 @@ public class Tarefa {
         }
     }
 
+    // case 0
+    public static boolean fechamento (List<Tarefa> listaTarefas) {
+        Cadastro.salvarArquivo("agenda.csv", listaTarefas);
+        System.out.println("Salvando e fechando agenda...");
+        return false;
+    }
+
     public String descricaoTrunc() {
         if (this.getDescricao() == null) return "";
         if (this.getDescricao().length() <= 48) return this.getDescricao();
